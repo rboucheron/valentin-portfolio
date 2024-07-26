@@ -1,16 +1,53 @@
+import { useEffect } from "react";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+
 function PhoneCard() {
+  const controlsRight = useAnimation();
+  const controlsTop = useAnimation();
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      controlsRight.start({
+        x: 0,
+        opacity: 1,
+        transition: { duration: 2.5 },
+      });
+      controlsTop.start({
+        y: 0,
+        opacity: 1,
+        transition: { duration: 2.5 },
+      });
+    }
+  }, [controlsRight, controlsTop, inView]);
+
   return (
-    <div className="flex flex-col md:flex-row items-start md:items-center space-x-6 space-y-8 md:space-y-0 md:space-x-8 p-4 mt-10">
-      <div className="ml-4">
+    <div
+      ref={ref}
+      className="flex flex-col md:flex-row items-start md:items-center space-x-6 space-y-8 md:space-y-0 md:space-x-8 p-4 mt-10"
+    >
+      <motion.div
+        initial={{ x: -100, opacity: 0 }}
+        animate={controlsRight}
+        className="ml-4"
+      >
         <img
           src="https://valentinlamour.website/assets/images/Pro_Geco.png"
           alt="Geco Application"
-          className=" w-64 m-auto rounded-lg shadow-lg"
+          className="w-64 m-auto rounded-lg shadow-lg"
         />
-      </div>
+      </motion.div>
 
-      <div className="md:w-3/4 space-y-4  ">
-        <h1 className="text-primary font-bold  text-xl ">
+      <motion.div
+        initial={{ y: -200, opacity: 0 }}
+        animate={controlsTop}
+        className="md:w-3/4 space-y-4"
+      >
+        <h1 className="text-primary font-bold text-xl">
           Application de suivi d’empreinte carbone
         </h1>
         <p className="text-primary text-sm">
@@ -29,7 +66,7 @@ function PhoneCard() {
           mutuellement et échanger des conseils pour promouvoir la durabilité
           environnementale.
         </p>
-      </div>
+      </motion.div>
     </div>
   );
 }
