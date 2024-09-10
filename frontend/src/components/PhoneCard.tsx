@@ -1,8 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, ReactNode } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
-function PhoneCard() {
+function PhoneCard({
+  children,
+  srcImage,
+  altImage,
+}: {
+  children: ReactNode;
+  srcImage: string;
+  altImage: string;
+}) {
   const controlsRight = useAnimation();
   const controlsTop = useAnimation();
   const [ref, inView] = useInView({
@@ -28,7 +36,7 @@ function PhoneCard() {
   return (
     <div
       ref={ref}
-      className="flex flex-col md:flex-row items-start md:items-center space-x-6 space-y-8 md:space-y-0 md:space-x-8 p-4 mt-10"
+      className="flex flex-col md:flex-row justify-around items-start md:items-center p-4 mt-10 space-x-6 space-y-8 md:space-y-0 md:space-x-8"
     >
       <motion.div
         initial={{ x: -100, opacity: 0 }}
@@ -36,8 +44,8 @@ function PhoneCard() {
         className="ml-4"
       >
         <img
-          src="https://valentinlamour.website/assets/images/Pro_Geco.png"
-          alt="Geco Application"
+          src={srcImage}
+          alt={altImage}
           className="w-64 m-auto rounded-lg shadow-lg"
         />
       </motion.div>
@@ -45,7 +53,7 @@ function PhoneCard() {
       <motion.div
         initial={{ y: -200, opacity: 0 }}
         animate={controlsTop}
-        className="md:w-3/4 space-y-4"
+        className="md:w-2/3 space-y-5 mx-4"
       >
         <h1 className="text-primary font-bold text-xl">
           Application de suivi d’empreinte carbone
@@ -66,6 +74,7 @@ function PhoneCard() {
           mutuellement et échanger des conseils pour promouvoir la durabilité
           environnementale.
         </p>
+        {children}
       </motion.div>
     </div>
   );

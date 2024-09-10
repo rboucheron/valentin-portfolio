@@ -16,7 +16,7 @@ const App: React.FC = () => {
           <Button>Contactez moi</Button>
         </div>
         <div className="mt-72">
-          <PhoneCard />
+          <PhoneCard srcImage=""></PhoneCard>
         </div>
       </div>
     </div>
