@@ -38,7 +38,7 @@ function PhoneCard({
     return (
         <div
             ref={ref}
-            className={`flex flex-col ${reverse ? 'md:flex-row-reverse justify-around' : 'md:flex-row justify-start'}    items-start md:items-center p-4 mt-10 space-x-6 space-y-8 md:space-y-0 md:space-x-8`}
+            className={`my-20 flex flex-col ${reverse ? 'md:flex-row-reverse justify-around' : 'md:flex-row justify-start'}    items-start md:items-center p-4 mt-10 space-x-6 space-y-8 md:space-y-0 md:space-x-8`}
         >
             <motion.div
                 initial={{x: -100, opacity: 0}}
